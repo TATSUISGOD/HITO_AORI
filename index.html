@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Green Shell</title>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .shell {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #7CFC00, #006400);
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ff00;
+    animation: pop 0.3s ease-out;
+  }
+
+  @keyframes pop {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  function whisper() {
+    const msg = new SpeechSynthesisUtterance("緑甲羅ぁ");
+    msg.rate = 0.7;     // ゆっくり
+    msg.pitch = 0.6;    // 低め
+    msg.volume = 0.8;
+    speechSynthesis.speak(msg);
+  }
+
+  function spawnShell() {
+    const shell = document.createElement("div");
+    shell.className = "shell";
+
+    shell.style.left = Math.random() * (window.innerWidth - 60) + "px";
+    shell.style.top = Math.random() * (window.innerHeight - 60) + "px";
+
+    document.body.appendChild(shell);
+    whisper();
+  }
+
+  // 画面タップ or クリックで出現（スマホ対応）
+  document.addEventListener("click", spawnShell);
+  document.addEventListener("touchstart", spawnShell);
+</script>
+
+</body>
+</html>
